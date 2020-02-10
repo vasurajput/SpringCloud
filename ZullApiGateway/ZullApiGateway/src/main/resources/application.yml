@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: API-GATEWAY
+
+server:
+  port: 8084
+
+eureka:
+  client:
+    service-url:
+      default-zone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    prefer-ip-address: true
+
+zuul:
+  ignoredServices: '*'
+  prefix: /api
+  routes:
+    microservice-1:                           
+       path: /zullPoint/**                    
+       serviceId: MICROSERVICE-1             
+    microservice-2:
+       path: /zullPoint_2/**
+       serviceId: MICROSERVICE-2
+  host:
+    socket-timeout-millis: 30000 
