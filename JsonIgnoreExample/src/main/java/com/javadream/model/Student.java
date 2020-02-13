@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 //@JsonIgnoreProperties(value = {"name","emailId"})
-@JsonIgnoreProperties(value = { "studentName", "studentEmailId" })
+//@JsonIgnoreProperties(value = { "studentName", "studentEmailId" })
+@JsonPropertyOrder(value = {"studentId", "studentEmailId" , "studentName"})
 public class Student {
 
 	// @JsonIgnore
