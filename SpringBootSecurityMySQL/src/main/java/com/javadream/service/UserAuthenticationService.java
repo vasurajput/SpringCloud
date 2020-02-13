@@ -23,7 +23,7 @@ public class UserAuthenticationService implements UserDetailsService {
 
 	@Autowired
 	private UserDao dao;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
@@ -33,15 +33,15 @@ public class UserAuthenticationService implements UserDetailsService {
 			logger.info("vvv::  calling loadUserByUsername for username= " + username);
 			User userInfo = dao.getUserInfo(username);
 			GrantedAuthority authority = new SimpleGrantedAuthority(userInfo.getRole());
-			UserDetails userDetails = (UserDetails) new org.springframework.security.core.userdetails.User(userInfo.getUserName(), userInfo.getPassword(),
-					Arrays.asList(authority));
+			UserDetails userDetails = (UserDetails) new org.springframework.security.core.userdetails.User(
+					userInfo.getUserName(), userInfo.getPassword(), Arrays.asList(authority));
 
-			
 			return userDetails;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
 
 }

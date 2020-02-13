@@ -16,7 +16,7 @@ import com.javadream.service.UserAuthenticationService;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
 	@Bean
@@ -38,7 +38,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/info/**").hasAnyRole("ADMIN", "USER").and().formLogin();
+		http.authorizeRequests()
+		.antMatchers("/signUp/**").permitAll()
+		.antMatchers("/userRoleAPIs/**")
+		.hasAnyRole("USER")
+		.antMatchers("/adminRoleAPIs/**")
+		.hasAnyRole("ADMIN")
+		.antMatchers("/anyRoleAPIs/**")
+		.hasAnyRole("USER","ADMIN")
+		.and().csrf().disable().formLogin();
 	}
 
 }
